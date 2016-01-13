@@ -1,0 +1,39 @@
+{
+  "name": "challenge",
+  "version": "1.0.0",
+  "description": "A wine REST challenge",
+  "homepage": "https://github.com/vkowalke/challenge#readme",
+  "author": "Volker Kowalke",
+  "main": "lib/app.js",
+  "engines": {
+    "node": "4.2.4"
+  },
+  "scripts": {
+    "start": "node lib/app",
+    "test": "grunt mochaTest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vkowalke/challenge.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vkowalke/challenge/issues"
+  },
+  "dependencies": {
+    "moment": "^2.11.1",
+    "restify": "^4.0.3",
+    "winston": "^2.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^1.10.3",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-eslint": "^17.3.1",
+    "grunt-mocha-test": "^0.12.7",
+    "mocha": "^2.3.4",
+    "should": "^8.1.1",
+    "sinon": "^1.17.2",
+    "supertest": "^1.1.0"
+  }
+}
