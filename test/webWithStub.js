@@ -8,7 +8,8 @@ var stubstore = require('./stubStorage');
 
 describe( 'webWithStubData', function() {
 	before(function() {
-		request = request.agent('http://localhost:1610');
+		var port = process.env.PORT || 5000;
+		request = request.agent('http://localhost:' + port);
 	});
 	
 	describe( 'GET /wines', function() {
