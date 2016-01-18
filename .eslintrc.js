@@ -1,5 +1,20 @@
 module.exports = {
+	"ecmaFeatures": {
+        "blockBindings": true
+    },
     "rules": {
+		"no-undef": [
+			0
+		],
+		"no-console": [
+			0
+		],
+		"no-unused-vars": [
+			1
+		],
+		"prefer-const": [ 
+			2
+		],
         "indent": [
             2,
             "tab"
