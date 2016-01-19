@@ -67,6 +67,10 @@ module.exports = {
 		"comma-style": [
 			2, 
 			"last"
+		],
+		"space-in-parens": [
+			2, 
+			"never"
 		]
     },
     "env": {

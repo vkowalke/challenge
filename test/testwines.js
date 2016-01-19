@@ -36,10 +36,6 @@ exports.getWine3 = function() {
 exports.getWine3Update = function() {
 	return {
 		id: 3,
-		name: 'Cabernet sauvignon',
-		year: 2013,
-		country: 'France',
-		type: 'red',
 		description: 'Similar to merlot'
 	};
 };

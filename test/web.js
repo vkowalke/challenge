@@ -1,29 +1,23 @@
 'use strict';
 
-var mongoose  = require( 'mongoose' );
 var request   = require('supertest');
-var should    = require('should');
-var config    = require( '../lib/config' );
-var Wine      = require( '../lib/wine.model');
+var config    = require('../lib/config');
 var testwine  = require('./testwines');
-var tablename = 'wines';
 
-describe( 'full functional test', function() {
-	var connected = false;
-	var db;
+describe('full functional test', function() {
 	
 	before(function() {
 		request = request.agent('http://localhost:' + config.getPort());
 	});
 	
-	describe( 'GET /wines/:id', function() {
+	describe('GET /wines/:id', function() {
 		
-		it( 'get a wine', function( done ) {
-			request.get('/wines/' + testwine.getWine1().id )
+		it('get a wine', function(done) {
+			request.get('/wines/' + testwine.getWine1().id)
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
 				.end(function(err, res) {
-					if ( res.status == 200 ) {
+					if (res.status == 200) {
 						res.status.should.equal(200);
 					} else {
 						res.status.should.equal(400);
@@ -34,9 +28,9 @@ describe( 'full functional test', function() {
 		});
 	});
 	
-	describe( 'GET /wines', function() {
+	describe('GET /wines', function() {
 		
-		it( 'get all stored wines', function( done ) {
+		it('get all stored wines', function(done) {
 			request.get('/wines')
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
@@ -46,7 +40,7 @@ describe( 'full functional test', function() {
 				});
 		});
 		
-		it( 'get all stored wines with query to year', function( done ) {
+		it('get all stored wines with query to year', function(done) {
 			request.get('/wines?year=2011')
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
@@ -56,7 +50,7 @@ describe( 'full functional test', function() {
 				});
 		});
 		
-		it( 'get all stored wines with query to name', function( done ) {
+		it('get all stored wines with query to name', function(done) {
 			request.get('/wines?name=Pinot noir')
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
@@ -66,7 +60,7 @@ describe( 'full functional test', function() {
 				});
 		});
 		
-		it( 'get all stored wines with query to type', function( done ) {
+		it('get all stored wines with query to type', function(done) {
 			request.get('/wines?type=red')
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
@@ -76,7 +70,7 @@ describe( 'full functional test', function() {
 				});
 		});
 		
-		it( 'get all stored wines with query to country', function( done ) {
+		it('get all stored wines with query to country', function(done) {
 			request.get('/wines?country=France')
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
@@ -86,7 +80,7 @@ describe( 'full functional test', function() {
 				});
 		});
 		
-		it( 'get all stored wines with query year and type', function( done ) {
+		it('get all stored wines with query year and type', function(done) {
 			request.get('/wines?year=2011&type=red')
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
@@ -96,7 +90,7 @@ describe( 'full functional test', function() {
 				});
 		});
 		
-		it( 'get error with a invalid query string', function( done ) {
+		it('get error with a invalid query string', function(done) {
 			request.get('/wines?servedWith=fish')
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
@@ -108,13 +102,13 @@ describe( 'full functional test', function() {
 		});
 	});
 	
-	describe( 'POST /wines', function() {
+	describe('POST /wines', function() {
 		
-		it( 'create a new wine successfully', function( done ) {
-			request.post( '/wines' )
-				.send( testwine.getWine3() )
-				.set( 'Accept', 'application/json')
-				.expect( 'Content-Type', /json/)
+		it('create a new wine successfully', function(done) {
+			request.post('/wines')
+				.send(testwine.getWine3())
+				.set('Accept', 'application/json')
+				.expect('Content-Type', /json/)
 				.end(function(err, res) {
 					res.status.should.equal(200);
 					res.body.name.should.equal(testwine.getWine3().name);
@@ -127,9 +121,9 @@ describe( 'full functional test', function() {
 				});
 		});
 		
-		it( 'create a new wine failed because type is not valid', function( done ) {
+		it('create a new wine failed because type is not valid', function(done) {
 			request.post('/wines')
-				.send( testwine.getWineInvalidType() )
+				.send(testwine.getWineInvalidType())
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
 				.end(function(err, res) {
@@ -140,9 +134,9 @@ describe( 'full functional test', function() {
 				});
 		});
 		
-		it( 'create a new wine failed because mandatory fields are missing', function( done ) {
+		it('create a new wine failed because mandatory fields are missing', function(done) {
 			request.post('/wines')
-				.send( testwine.getWineFieldsMissing() )
+				.send(testwine.getWineFieldsMissing())
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
 				.end(function(err, res) {
@@ -154,11 +148,11 @@ describe( 'full functional test', function() {
 		});
 	});
 	
-	describe( 'PUT /wines/:id', function() {
+	describe('PUT /wines/:id', function() {
 		
-		it( 'update an existing wine successfully', function( done ) {
-			request.put('/wines/' + testwine.getWine3Update().id )
-				.send( testwine.getWine3Update() )
+		it('update an existing wine successfully', function(done) {
+			request.put('/wines/' + testwine.getWine3Update().id)
+				.send(testwine.getWine3Update())
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
 				.end(function(err, res) {
@@ -167,9 +161,9 @@ describe( 'full functional test', function() {
 				});
 		});
 		
-		it( 'update an existing wine failed because not existing', function( done ) {
-			request.put('/wines/' + testwine.getWineNotExist().id )
-				.send( testwine.getWineNotExist() )
+		it('update an existing wine failed because not existing', function(done) {
+			request.put('/wines/' + testwine.getWineNotExist().id)
+				.send(testwine.getWineNotExist())
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
 				.end(function(err, res) {
@@ -180,9 +174,9 @@ describe( 'full functional test', function() {
 		});
 	});
 	
-	describe( 'DELETE /wines/:id', function() {
+	describe('DELETE /wines/:id', function() {
 
-		it( 'delete an existing wine successfully', function( done ) {
+		it('delete an existing wine successfully', function(done) {
 			request.delete('/wines/' + testwine.getWine3().id)
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
@@ -192,7 +186,7 @@ describe( 'full functional test', function() {
 				});
 		});
 		
-		it( 'delete an existing wine failed because not existing', function( done ) {
+		it('delete an existing wine failed because not existing', function(done) {
 			request.delete('/wines/' + testwine.getWineNotExist().id)
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
