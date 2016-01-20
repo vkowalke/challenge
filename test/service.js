@@ -160,7 +160,7 @@ describe('service unit test', function() {
 			});
 		});
 		
-		it.skip('update a wine which does not exist', function (done) {
+		it('update a wine which does not exist', function (done) {
 			service.update(testwine.getWineNotExist().id, testwine.getWine3Update(), function(err, wine) {
 				should.not.exist(err);
 				stub.callCount.should.equal(2);
@@ -191,7 +191,7 @@ describe('service unit test', function() {
 			});
 		});
 		
-		it.skip('delete a wine which does not exist', function (done) {
+		it('delete a wine which does not exist', function (done) {
 			service.del(testwine.getWineNotExist().id, function(err, status) {
 				should.not.exist(err);
 				stub.callCount.should.equal(2);
